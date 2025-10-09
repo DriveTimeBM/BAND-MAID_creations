@@ -80,7 +80,6 @@
       text-decoration: underline;
     }
 
-    /* Full image overlay viewer */
     #viewerOverlay {
       display: none;
       position: fixed;
@@ -107,7 +106,6 @@
       color: #fff;
       cursor: pointer;
     }
-
   </style>
 </head>
 <body>
@@ -125,7 +123,7 @@
   </div>
 
   <script>
-    const repoOwner = "DriveTimeBM";  
+    const repoOwner = "DriveTimeBM";   
     const repoName = "BAND-MAID_creations";
     const branch = "main";
 
@@ -135,6 +133,7 @@
     const folderList = document.getElementById("folderList");
     const gallery = document.getElementById("gallery");
 
+    // Load level 1 folders
     async function loadFolders(path = "") {
       folderList.innerHTML = "Loading...";
       const res = await fetch(`${apiBase}/${path}?ref=${branch}`);
@@ -163,13 +162,64 @@
           div.innerHTML = `<a href="#" class="fileLink">📁 ${item.name}</a>`;
           div.querySelector("a").addEventListener("click", (e) => {
             e.preventDefault();
-            loadGallery(item.path);
+            loadSubFolders(item.path);
           });
           folderList.appendChild(div);
         }
       }
     }
 
+    // Load subfolders (2nd level)
+    async function loadSubFolders(path) {
+      folderList.innerHTML = "Loading subfolders...";
+      const res = await fetch(`${apiBase}/${path}?ref=${branch}`);
+      if (!res.ok) {
+        folderList.innerHTML = "❌ Failed to load directory.";
+        return;
+      }
+
+      const items = await res.json();
+      folderList.innerHTML = "";
+
+      const back = document.createElement("div");
+      back.innerHTML = `<a href="#" class="fileLink">⬅️ Back</a>`;
+      back.addEventListener("click", (e) => {
+        e.preventDefault();
+        const parent = path.split("/").slice(0, -1).join("/");
+        loadFolders(parent);
+      });
+      folderList.appendChild(back);
+
+      // Show subfolders and images
+      const subfolders = items.filter(i => i.type === "dir");
+      const images = items.filter(i => /\.(png|jpe?g|gif|svg|ico)$/i.test(i.name));
+
+      for (const sub of subfolders) {
+        const div = document.createElement("div");
+        div.innerHTML = `<a href="#" class="fileLink">📂 ${sub.name}</a>`;
+        div.querySelector("a").addEventListener("click", (e) => {
+          e.preventDefault();
+          loadGallery(sub.path);
+        });
+        folderList.appendChild(div);
+      }
+
+      if (images.length) {
+        gallery.innerHTML = "";
+        for (const img of images) {
+          const thumb = document.createElement("div");
+          thumb.className = "thumb";
+          const src = `${rawBase}/${img.path}`;
+          thumb.innerHTML = `<img src="${src}" alt="${img.name}" />`;
+          thumb.addEventListener("click", () => openViewer(src));
+          gallery.appendChild(thumb);
+        }
+      } else {
+        gallery.innerHTML = "Select a subfolder to view its images.";
+      }
+    }
+
+    // Load gallery (final level)
     async function loadGallery(path) {
       gallery.innerHTML = "Loading images...";
       const res = await fetch(`${apiBase}/${path}?ref=${branch}`);
@@ -179,17 +229,13 @@
       }
 
       const items = await res.json();
-      const images = items.filter(i =>
-        /\.(png|jpe?g|gif|svg|ico)$/i.test(i.name)
-      );
-
+      const images = items.filter(i => /\.(png|jpe?g|gif|svg|ico)$/i.test(i.name));
       if (!images.length) {
         gallery.innerHTML = "No images found in this folder.";
         return;
       }
 
       gallery.innerHTML = "";
-
       for (const img of images) {
         const thumb = document.createElement("div");
         thumb.className = "thumb";
