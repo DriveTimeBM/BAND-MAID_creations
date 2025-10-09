@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BAND-MAID Creations Gallery</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background-color: #111;
+      color: #eee;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #222;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #333;
+    }
+
+    header h1 {
+      font-size: 1.4rem;
+      margin: 0;
+      color: #66ccff;
+    }
+
+    #content {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+
+    #folderList {
+      width: 25%;
+      overflow-y: auto;
+      border-right: 2px solid #333;
+      padding: 1rem;
+    }
+
+    #gallery {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+    }
+
+    .thumb {
+      cursor: pointer;
+      transition: transform 0.2s;
+      border: 2px solid #333;
+      border-radius: 6px;
+      background-color: #181818;
+    }
+
+    .thumb:hover {
+      transform: scale(1.05);
+      border-color: #66ccff;
+    }
+
+    .thumb img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 6px;
+    }
+
+    .fileLink {
+      display: block;
+      margin-bottom: 6px;
+      color: #66ccff;
+      text-decoration: none;
+    }
+
+    .fileLink:hover {
+      text-decoration: underline;
+    }
+
+    /* Full image overlay viewer */
+    #viewerOverlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    #viewerOverlay img {
+      max-width: 90%;
+      max-height: 90%;
+      border: 4px solid #66ccff;
+      border-radius: 8px;
+    }
+
+    #viewerOverlay span {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>BAND-MAID Creations Gallery</h1>
+  </header>
+  <div id="content">
+    <div id="folderList">Loading folders...</div>
+    <div id="gallery">Select a folder to view its images.</div>
+  </div>
+
+  <div id="viewerOverlay">
+    <span onclick="closeViewer()">&times;</span>
+    <img id="fullImage" src="" alt="Full size view" />
+  </div>
+
+  <script>
+    const repoOwner = "DriveTimeBM";  
+    const repoName = "BAND-MAID_creations";
+    const branch = "main";
+
+    const apiBase = `https://api.github.com/repos/${repoOwner}/${repoName}/contents`;
+    const rawBase = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${branch}`;
+
+    const folderList = document.getElementById("folderList");
+    const gallery = document.getElementById("gallery");
+
+    async function loadFolders(path = "") {
+      folderList.innerHTML = "Loading...";
+      const res = await fetch(`${apiBase}/${path}?ref=${branch}`);
+      if (!res.ok) {
+        folderList.innerHTML = "❌ Failed to load directory.";
+        return;
+      }
+      const items = await res.json();
+      folderList.innerHTML = "";
+
+      if (path) {
+        const back = document.createElement("div");
+        back.innerHTML = `<a href="#" class="fileLink">⬅️ Back</a>`;
+        back.addEventListener("click", (e) => {
+          e.preventDefault();
+          const parent = path.split("/").slice(0, -1).join("/");
+          loadFolders(parent);
+          gallery.innerHTML = "Select a folder to view its images.";
+        });
+        folderList.appendChild(back);
+      }
+
+      for (const item of items) {
+        if (item.type === "dir") {
+          const div = document.createElement("div");
+          div.innerHTML = `<a href="#" class="fileLink">📁 ${item.name}</a>`;
+          div.querySelector("a").addEventListener("click", (e) => {
+            e.preventDefault();
+            loadGallery(item.path);
+          });
+          folderList.appendChild(div);
+        }
+      }
+    }
+
+    async function loadGallery(path) {
+      gallery.innerHTML = "Loading images...";
+      const res = await fetch(`${apiBase}/${path}?ref=${branch}`);
+      if (!res.ok) {
+        gallery.innerHTML = "❌ Failed to load images.";
+        return;
+      }
+
+      const items = await res.json();
+      const images = items.filter(i =>
+        /\.(png|jpe?g|gif|svg|ico)$/i.test(i.name)
+      );
+
+      if (!images.length) {
+        gallery.innerHTML = "No images found in this folder.";
+        return;
+      }
+
+      gallery.innerHTML = "";
+
+      for (const img of images) {
+        const thumb = document.createElement("div");
+        thumb.className = "thumb";
+        const src = `${rawBase}/${img.path}`;
+        thumb.innerHTML = `<img src="${src}" alt="${img.name}" />`;
+        thumb.addEventListener("click", () => openViewer(src));
+        gallery.appendChild(thumb);
+      }
+    }
+
+    function openViewer(src) {
+      const overlay = document.getElementById("viewerOverlay");
+      const fullImage = document.getElementById("fullImage");
+      fullImage.src = src;
+      overlay.style.display = "flex";
+    }
+
+    function closeViewer() {
+      document.getElementById("viewerOverlay").style.display = "none";
+    }
+
+    loadFolders();
+  </script>
+</body>
+</html>
