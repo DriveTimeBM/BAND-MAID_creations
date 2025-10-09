@@ -240,7 +240,8 @@
         const thumb = document.createElement("div");
         thumb.className = "thumb";
         const src = `${rawBase}/${img.path}`;
-        thumb.innerHTML = `<img src="${src}" alt="${img.name}" />`;
+        //thumb.innerHTML = `<img src="${src}" alt="${img.name}" />`;
+        thumb.innerHTML = `<img src="${src}" alt="${img.name}" title="${img.name}" />`;
         thumb.addEventListener("click", () => openViewer(src));
         gallery.appendChild(thumb);
       }
