@@ -25,20 +25,20 @@ The repo is published through **GitHub Pages** as an interactive gallery:
 ## 🗂️ Repository Structure
 
 BAND-MAID_creations/
-├── 8-bit/ # Pixel-art style BAND-MAID images
-├── gifs/ # Animated BAND-MAID GIFs and loops
-├── Letters/ # Isolated from the BAND-MAID logo
-│ └── Generated/ # AI-assisted letter generation
-├── logo/ # BAND-MAID logo variations and concepts
-│ ├── 3D/ # 3D logo renderings
-│ ├── other/ # Miscellaneous logo experiments
-│ └── Textured/ # Surface-textured logo designs
-├── Memes/ # BAND-MAID-related memes and humorous edits
-├── misc/ # Miscellaneous creations and assets
-├── photos/ # Member-specific photo edits
-│ ├── Akane/ # Akane images
-│ ├── Kanami/ # Kanami images
-│ ├── Miku/ # Miku Kobato images
-│ ├── MISA/ # MISA (bass) images
-│ └── Saiki/ # Saiki images
-└── ribbon/ # Ribbon logo and accessory designs
+├── 8-bit/                 # Pixel-art style BAND-MAID images
+├── gifs/                  # Animated BAND-MAID GIFs and loops
+├── Letters/               # Letters extracted from the official logo
+│   └── Generated/         # AI-assisted letter generation
+├── logo/                  # BAND-MAID logo variations and concepts
+│   ├── 3D/                # 3D logo renderings
+│   ├── other/             # Miscellaneous logo experiments
+│   └── Textured/          # Surface-textured logo designs
+├── Memes/                 # BAND-MAID-related memes and humorous edits
+├── misc/                  # Miscellaneous creations and assets
+├── photos/                # Member-specific photo edits
+│   ├── Akane/             # Akane (drums)
+│   ├── Kanami/            # Kanami (guitar)
+│   ├── Miku/              # Miku Kobato (guitar/vocals)
+│   ├── MISA/              # MISA (bass)
+│   └── Saiki/             # Saiki (vocals)
+└── ribbon/                # Ribbon logo and accessory designs
