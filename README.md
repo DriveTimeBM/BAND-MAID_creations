@@ -24,21 +24,16 @@ The repo is published through **GitHub Pages** as an interactive gallery:
 
 ## 🗂️ Repository Structure
 
-BAND-MAID_creations/
-├── 8-bit/                 # Pixel-art style BAND-MAID images
-├── gifs/                  # Animated BAND-MAID GIFs and loops
-├── Letters/               # Letters extracted from the official logo
-│   └── Generated/         # AI-assisted letter generation
-├── logo/                  # BAND-MAID logo variations and concepts
-│   ├── 3D/                # 3D logo renderings
-│   ├── other/             # Miscellaneous logo experiments
-│   └── Textured/          # Surface-textured logo designs
-├── Memes/                 # BAND-MAID-related memes and humorous edits
-├── misc/                  # Miscellaneous creations and assets
-├── photos/                # Member-specific photo edits
-│   ├── Akane/             # Akane (drums)
-│   ├── Kanami/            # Kanami (guitar)
-│   ├── Miku/              # Miku Kobato (guitar/vocals)
-│   ├── MISA/              # MISA (bass)
-│   └── Saiki/             # Saiki (vocals)
-└── ribbon/                # Ribbon logo and accessory designs
+## 📁 Top-Level Folders
+
+| Folder | Description |
+|:--|:--|
+| **8-bit** | Pixel-art and retro-style BAND-MAID images |
+| **gifs** | Animated BAND-MAID GIFs and short loops |
+| **Letters** | Alphabet extracted from the logo and AI-generated fan characters (possible font use) |
+| **logo** | BAND-MAID logo concepts and design variations |
+| **Memes** | Humorous or meme-style BAND-MAID edits |
+| **misc** | Miscellaneous creations and images |
+| **photos** | Edited and generated BAND-MAID photos by member |
+| **ribbon** | Ribbon logo and variations |
+
