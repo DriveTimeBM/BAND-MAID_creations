@@ -24,8 +24,6 @@ The repo is published through **GitHub Pages** as an interactive gallery:
 
 ## 🗂️ Repository Structure
 
-## 📁 Top-Level Folders
-
 | Folder | Description |
 |:--|:--|
 | **8-bit** | Pixel-art and retro-style BAND-MAID images |
@@ -37,3 +35,13 @@ The repo is published through **GitHub Pages** as an interactive gallery:
 | **photos** | Edited and generated BAND-MAID photos by member |
 | **ribbon** | Ribbon logo and variations |
 
+## All BAND-MAID Projects
+
+- [BAND-MAID X/Twitter Archive](https://github.com/DriveTimeBM/BAND-MAID_tweets)
+- [BAND-MAID Song Sorter (Ranker)](https://github.com/DriveTimeBM/BAND-MAID_song_sorter)
+- [BAND-MAID GIF Catalog](https://github.com/DriveTimeBM/BAND-MAID_gifs)
+- [BAND-MAID Reports](https://github.com/DriveTimeBM/BAND-MAID_reports)
+- [BAND-MAID Instagram Archive](https://github.com/DriveTimeBM/BAND-MAID_instagram)
+- [BAND-MAID Instagram Archive](https://github.com/DriveTimeBM/BAND-MAID_gpt)
+- [BAND-MAID Instagram Archive](https://github.com/DriveTimeBM/BAND-MAID_prime)
+- [BAND-MAID Instagram Archive](https://github.com/DriveTimeBM/BAND-MAID_creations)
