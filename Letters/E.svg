@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 810" width="780" height="810">
+
+  <rect width="780" height="810" fill="#111111"/>
+
+  <path
+    id="prime-E"
+    d="M 691,735
+       L 565,563
+       L 310,563
+       L 310,449
+	   L 540,449
+       L 630,379
+	   L 540,309
+       L 310,309
+       L 310,201
+       L 577,201
+       L 701,50
+       L 140,50
+       L 140,737
+       Z"
+    fill="#E8C832"
+    stroke="none"
+  />
+
+</svg>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 800" width="780" height="800">
+
+  <rect width="780" height="800" fill="#111111"/>
+
+  <!--
+    Main outline: clockwise
+    Cutout triangle: counter-clockwise (punches a hole via nonzero winding)
+    Cutout vertices: (331,176)  (467,176)  (331,312)
+	370,448
+  -->
+  <path
+    id="prime-P"
+    fill-rule="nonzero"
+    d="M 176,40
+       L 739,40
+	   L 370,448
+       L 331,448
+       L 331,720
+       L 176,720
+       L 176,448
+       L 40,448
+       L 176,312
+       L 176,176
+       L 40,176
+       Z
+       M 331,176
+       L 331,312
+       L 467,176
+       Z"
+    fill="#E8C832"
+    stroke="none"
+  />
+
+
+</svg>
