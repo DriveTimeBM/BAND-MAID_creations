@@ -18,7 +18,7 @@ The repo is published through **GitHub Pages** as an interactive gallery:
 - 💬 **Tooltips**  
   Hovering over any image shows its file name.
 - 🪶 **Lightweight & client-side only**  
-  Everything runs in the browser—no backend required.
+  Everything runs in the browser—no backend required..
 
 ---
 
